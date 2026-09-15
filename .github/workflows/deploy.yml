@@ -14,7 +14,8 @@ jobs:
         run: |
           cd /var/www/system-integrator
           git config --global --add safe.directory /var/www/system-integrator
-          git pull origin main
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Reload Containers & Optimize Laravel
         run: |
@@ -24,4 +25,4 @@ jobs:
           docker compose exec -T app php artisan migrate --force
           docker compose exec -T app php artisan optimize:clear
           docker compose exec -T app php artisan optimize
-          chmod -R 775 storage bootstrap/cache
+          docker compose exec -T app chown -R www-data:www-data storage bootstrap/cache
