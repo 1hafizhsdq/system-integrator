@@ -24,4 +24,4 @@ jobs:
           docker compose exec -T app php artisan migrate --force
           docker compose exec -T app php artisan optimize:clear
           docker compose exec -T app php artisan optimize
-          sudo chmod -R 775 storage bootstrap/cache
+          chmod -R 775 storage bootstrap/cache
