@@ -5,7 +5,134 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+@layer base {
+  :root {
+    --cyber-black: #06080d;
+    --cyber-dark: #0a0e17;
+    --cyber-surface: #101726;
+    --cyber-cyan: #00f2fe;
+    --cyber-cyan-glow: rgba(0, 242, 254, 0.4);
+    --cyber-blue: #4facfe;
+    --cyber-purple: #7928ca;
+    --cyber-purple-glow: rgba(121, 40, 202, 0.4);
+    --cyber-amber: #ffaa00;
+    --cyber-green: #00ff66;
+    --cyber-border: rgba(0, 242, 254, 0.18);
+  }
+
+  body {
+    background-color: var(--cyber-black);
+    color: #e2e8f0;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Sci-fi Scanline Effect Overlay */
+.cyber-scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Background Cyber Grid */
+.cyber-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+}
+
+/* Glow Utilities */
+.glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 242, 254, 0.6), 0 0 20px rgba(0, 242, 254, 0.3);
+}
+
+.glow-purple {
+  text-shadow: 0 0 10px rgba(121, 40, 202, 0.6), 0 0 20px rgba(121, 40, 202, 0.3);
+}
+
+.box-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15), inset 0 0 15px rgba(0, 242, 254, 0.05);
+}
+
+.box-glow-cyan-hover:hover {
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.3), inset 0 0 20px rgba(0, 242, 254, 0.1);
+}
+
+/* Sci-fi Chamfer / Cut Corner */
+.cyber-corner {
+  clip-path: polygon(
+    0 12px,
+    12px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.cyber-corner-tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* 3D Tilt Card Base */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+  will-change: transform;
+}
+
+.tilt-content {
+  transform: translateZ(30px);
+}
+
+/* Futuristic Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06080d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00f2fe, #7928ca);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00f2fe;
+  box-shadow: 0 0 10px #00f2fe;
+}
+
+/* Glowing Border Animation */
+@keyframes cyber-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+.animate-cyber-pulse {
+  animation: cyber-pulse 3s infinite ease-in-out;
+}
+
+/* Terminal Font */
+.font-mono-cyber {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
 }
